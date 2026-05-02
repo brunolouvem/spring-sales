@@ -1,5 +1,20 @@
 const items = [
   {
+    name: "Canon EOS250D",
+    description: "Canon EOS250D. Original price: €728,00",
+    price: 600,
+    currency: "€",
+    images: [
+      "assets/images/camera-canon-eos-250d-4.jpeg",
+      "assets/images/camera-canon-eos-250d-1.jpeg",
+      "assets/images/camera-canon-eos-250d-2.jpeg",
+      "assets/images/camera-canon-eos-250d-3.jpeg",
+      "assets/images/camera-canon-eos-250d-5.jpeg"
+    ],
+    storeUrl: "https://www.amazon.de/-/en/Canon-EOS-250D-Case-f4-5-6/dp/B07QS1PYSB/ref=sr_1_2?crid=1OLH0X5I8VTQP&dib=eyJ2IjoiMSJ9.pf0c1LhIfDEKRBmi2cFCXnVK7V395w3JbHlrwG2-r2_1I7684fRN0KqfROS4KaI5VCr8kQ3gKpC9h7DFTkLo1wpI0fzdKB8PkZcjfWh6QzE430Gtkv4q_U44oscuDIxhjbMv5BJ8KyhURtVzqZbbbWje0mCmS8SiRYW5V-hNX_KEkfBDr6VmU_BZiy9jf0QntmdpKvGoyVZduWQrl5F4VeuY0AujlY6aJlsim1DzqWE.hb2UjGTivU2Ep5DSr1motPhThTaAPcps3H3mq7qAN18&dib_tag=se&keywords=Canon%2BEOS250D&qid=1777311836&sprefix=canon%2Beos250d%2Caps%2C149&sr=8-2&th=1",
+    storeName: "amazon.de",
+  },
+  {
     name: "Gimbal DJI RS 3 Mini + Smallrig adapter",
     description: "Gimbal DJI RS 3 Mini + Smallrig adapter. Original price: €225,00",
     price: 190,
@@ -22,21 +37,6 @@ const items = [
       "assets/images/pgytech-support-1.jpeg"
     ],
     storeUrl: "https://www.amazon.de/-/en/PGYTECH-MANTISPOD-Vlogging-Flexible-Shooting/dp/B0BKFLH1H8?ref_=ast_sto_dp&th=1",
-    storeName: "amazon.de",
-  },
-  {
-    name: "Canon EOS250D",
-    description: "Canon EOS250D. Original price: €728,00",
-    price: 600,
-    currency: "€",
-    images: [
-      "assets/images/camera-canon-eos-250d-1.jpeg",
-      "assets/images/camera-canon-eos-250d-2.jpeg",
-      "assets/images/camera-canon-eos-250d-3.jpeg",
-      "assets/images/camera-canon-eos-250d-4.jpeg",
-      "assets/images/camera-canon-eos-250d-5.jpeg"
-    ],
-    storeUrl: "https://www.amazon.de/-/en/Canon-EOS-250D-Case-f4-5-6/dp/B07QS1PYSB/ref=sr_1_2?crid=1OLH0X5I8VTQP&dib=eyJ2IjoiMSJ9.pf0c1LhIfDEKRBmi2cFCXnVK7V395w3JbHlrwG2-r2_1I7684fRN0KqfROS4KaI5VCr8kQ3gKpC9h7DFTkLo1wpI0fzdKB8PkZcjfWh6QzE430Gtkv4q_U44oscuDIxhjbMv5BJ8KyhURtVzqZbbbWje0mCmS8SiRYW5V-hNX_KEkfBDr6VmU_BZiy9jf0QntmdpKvGoyVZduWQrl5F4VeuY0AujlY6aJlsim1DzqWE.hb2UjGTivU2Ep5DSr1motPhThTaAPcps3H3mq7qAN18&dib_tag=se&keywords=Canon%2BEOS250D&qid=1777311836&sprefix=canon%2Beos250d%2Caps%2C149&sr=8-2&th=1",
     storeName: "amazon.de",
   },
   {
