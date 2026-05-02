@@ -431,6 +431,11 @@ footer {
     padding: 0 1rem;
     margin: 2rem auto;
   }
+
+  .carousel-btn,
+  .carousel-dots {
+    opacity: 1;
+  }
 }
 
 /* ── Mobile (1 column) ── */
