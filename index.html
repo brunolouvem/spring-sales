@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Spring Sale</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <header>
+    <div class="header-badge">Items for sale</div>
+    <h1>Spring Sale</h1>
+    <p>Great condition, low prices </p>
+  </header>
+
+  <main id="catalog"></main>
+
+  <footer>
+    <p>Interested? Contact me directly to arrange pickup. <br> 📞+32 492 55 68 89 - Amanda</p>
+  </footer>
+
+  <!-- Lightbox -->
+  <div id="lightbox" role="dialog" aria-modal="true" aria-label="Image preview">
+    <button id="lightbox-close" aria-label="Close">&times;</button>
+    <img id="lightbox-img" src="" alt="" />
+  </div>
+
+  <script src="catalog.js"></script>
+  <script>
+    const catalog = document.getElementById("catalog");
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightbox-img");
+    const lightboxClose = document.getElementById("lightbox-close");
+
+    function openLightbox(src, alt) {
+      lightboxImg.src = src;
+      lightboxImg.alt = alt;
+      lightbox.classList.add("active");
+      document.body.style.overflow = "hidden";
+      lightboxClose.focus();
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove("active");
+      document.body.style.overflow = "";
+      lightboxImg.src = "";
+    }
+
+    lightbox.addEventListener("click", (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+
+    lightboxClose.addEventListener("click", closeLightbox);
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeLightbox();
+    });
+
+    items.forEach((item, itemIndex) => {
+      const card = document.createElement("article");
+      card.className = "card" + (item.reserved ? " reserved" : "");
+
+      let imagesHtml = '';
+      let dotsHtml = '';
+      if (item.images && item.images.length > 0) {
+        item.images.forEach((img, i) => {
+          const isActive = i === 0 ? " active" : "";
+          imagesHtml += `<img src="${img}" alt="${item.name}" class="carousel-img${isActive}" loading="lazy" role="button" tabindex="0" title="Click to enlarge" data-index="${i}"/>`;
+          dotsHtml += `<span class="dot${isActive}" data-index="${i}"></span>`;
+        });
+      }
+
+      let controlsHtml = '';
+      if (item.images && item.images.length > 1) {
+        controlsHtml = `
+          <button class="carousel-btn prev" aria-label="Previous">&lsaquo;</button>
+          <button class="carousel-btn next" aria-label="Next">&rsaquo;</button>
+          <div class="carousel-dots">${dotsHtml}</div>
+        `;
+      }
+
+      card.innerHTML = `
+        <div class="image-wrap${item.reserved ? " reserved" : ""}">
+          ${item.reserved ? '<div class="reserved-overlay"></div>' : ""}
+          <div class="carousel">
+            ${imagesHtml}
+            ${controlsHtml}
+          </div>
+        </div>
+        <div class="info">
+          <h2>${item.name}${item.reserved ? '<span class="reserved-badge">Reserved</span>' : ""}</h2>
+          <p class="desc">${item.description}</p>
+          <button class="read-more-btn" aria-expanded="false" style="display: none;">Read more</button>
+          <div class="bottom">
+            <span class="price">${item.currency} ${item.price.toLocaleString("pt-BR")}</span>
+            <a class="compare-link" href="${item.storeUrl}" target="_blank" rel="noopener">
+              ${item.storeName} ↗
+            </a>
+          </div>
+        </div>
+      `;
+
+      // Carousel Logic
+      const images = card.querySelectorAll(".carousel-img");
+      const dots = card.querySelectorAll(".dot");
+      const prevBtn = card.querySelector(".carousel-btn.prev");
+      const nextBtn = card.querySelector(".carousel-btn.next");
+      let currentIndex = 0;
+
+      function showImage(index) {
+        images[currentIndex].classList.remove("active");
+        if (dots.length > 0) dots[currentIndex].classList.remove("active");
+
+        currentIndex = index;
+
+        images[currentIndex].classList.add("active");
+        if (dots.length > 0) dots[currentIndex].classList.add("active");
+      }
+
+      if (prevBtn && nextBtn) {
+        prevBtn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          const newIndex = currentIndex === 0 ? images.length - 1 : currentIndex - 1;
+          showImage(newIndex);
+        });
+
+        nextBtn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          const newIndex = currentIndex === images.length - 1 ? 0 : currentIndex + 1;
+          showImage(newIndex);
+        });
+      }
+
+      // Lightbox logic
+      images.forEach((img, index) => {
+        img.addEventListener("click", () => openLightbox(img.src, item.name));
+        img.addEventListener("keydown", (e) => {
+          if (e.key === "Enter" || e.key === " ") openLightbox(img.src, item.name);
+        });
+      });
+
+      catalog.appendChild(card);
+
+      // Read more logic
+      const descElement = card.querySelector(".desc");
+      const readMoreBtn = card.querySelector(".read-more-btn");
+
+      setTimeout(() => {
+        if (descElement.scrollHeight > descElement.clientHeight) {
+          readMoreBtn.style.display = "inline-block";
+          readMoreBtn.addEventListener("click", () => {
+            const isExpanded = descElement.classList.contains("expanded");
+            if (isExpanded) {
+              descElement.classList.remove("expanded");
+              readMoreBtn.textContent = "Read more";
+            } else {
+              descElement.classList.add("expanded");
+              readMoreBtn.textContent = "Read less";
+            }
+          });
+        }
+      }, 0);
+    });
+  </script>
+
+</body>
+
+</html>
