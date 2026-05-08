@@ -48,7 +48,8 @@ To add or update items in the catalog:
       ],
       storeUrl: "https://external-link.com",
       storeName: "amazon.de",
-      reserved: false // Optional: set to true to show as reserved
+      reserved: false, // Optional: set to true to show as reserved
+      sold: false      // Optional: set to true to show as sold
     }
     ```
 
@@ -60,3 +61,4 @@ To add or update items in the catalog:
 - **Theming:** Use CSS variables defined in `:root` for colors and spacing to maintain consistency.
 - **Grid Layout:** The main catalog uses a CSS Grid `auto-fill` pattern to automatically adjust the number of columns based on screen width.
 - **Images:** Product images should ideally follow a consistent aspect ratio (currently 3:4) for the best visual alignment in the grid.
+best visual alignment in the grid.

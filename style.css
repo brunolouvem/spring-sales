@@ -370,13 +370,15 @@ footer {
   outline: none;
 }
 
-/* ── Reserved overlay ── */
-.image-wrap.reserved .carousel {
+/* ── Reserved & Sold overlays ── */
+.image-wrap.reserved .carousel,
+.image-wrap.sold .carousel {
   filter: grayscale(100%);
   opacity: 0.55;
 }
 
-.reserved-overlay {
+.reserved-overlay,
+.sold-overlay {
   position: absolute;
   inset: 0;
   display: flex;
@@ -387,8 +389,8 @@ footer {
   overflow: hidden;
 }
 
-.reserved-overlay::after {
-  content: "RESERVED";
+.reserved-overlay::after,
+.sold-overlay::after {
   font-family: var(--font);
   font-size: 1.6rem;
   font-weight: 800;
@@ -404,12 +406,22 @@ footer {
   backdrop-filter: blur(1px);
 }
 
-.card.reserved .price {
+.reserved-overlay::after {
+  content: "RESERVED";
+}
+
+.sold-overlay::after {
+  content: "SOLD";
+}
+
+.card.reserved .price,
+.card.sold .price {
   color: var(--muted);
   text-decoration: line-through;
 }
 
-.reserved-badge {
+.reserved-badge,
+.sold-badge {
   display: inline-block;
   background: #1a1a1a;
   color: #fff;
@@ -421,6 +433,10 @@ footer {
   border-radius: 20px;
   vertical-align: middle;
   margin-left: 0.4rem;
+}
+
+.sold-badge {
+  background: #ef4444; /* Red for Sold */
 }
 
 /* ── Tablet (2 columns) ── */

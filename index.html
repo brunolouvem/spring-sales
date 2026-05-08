@@ -79,7 +79,8 @@
 
     items.forEach((item, itemIndex) => {
       const card = document.createElement("article");
-      card.className = "card" + (item.reserved ? " reserved" : "");
+      const statusClass = item.sold ? " sold" : (item.reserved ? " reserved" : "");
+      card.className = "card" + statusClass;
 
       let imagesHtml = '';
       let dotsHtml = '';
@@ -100,16 +101,19 @@
         `;
       }
 
+      const overlayHtml = item.sold ? '<div class="sold-overlay"></div>' : (item.reserved ? '<div class="reserved-overlay"></div>' : "");
+      const badgeHtml = item.sold ? '<span class="sold-badge">Sold</span>' : (item.reserved ? '<span class="reserved-badge">Reserved</span>' : "");
+
       card.innerHTML = `
-        <div class="image-wrap${item.reserved ? " reserved" : ""}">
-          ${item.reserved ? '<div class="reserved-overlay"></div>' : ""}
+        <div class="image-wrap${statusClass}">
+          ${overlayHtml}
           <div class="carousel">
             ${imagesHtml}
             ${controlsHtml}
           </div>
         </div>
         <div class="info">
-          <h2>${item.name}${item.reserved ? '<span class="reserved-badge">Reserved</span>' : ""}</h2>
+          <h2>${item.name}${badgeHtml}</h2>
           <p class="desc">${item.description}</p>
           <button class="read-more-btn" aria-expanded="false" style="display: none;">Read more</button>
           <div class="bottom">
